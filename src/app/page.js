@@ -1,66 +1,163 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
 
-export default function Home() {
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import SearchBar from '../components/SearchBar';
+import '../styles/pages/home.css';
+
+const FEATURED_DEVS = [
+  { username: 'torvalds', name: 'Linus Torvalds' },
+  { username: 'gaearon', name: 'Dan Abramov' },
+  { username: 'sindresorhus', name: 'Sindre Sorhus' },
+  { username: 'tj', name: 'TJ Holowaychuk' },
+  { username: 'yyx990803', name: 'Evan You' },
+  { username: 'getify', name: 'Kyle Simpson' },
+  { username: 'kentcdodds', name: 'Kent C. Dodds' },
+  { username: 'ThePrimeagen', name: 'ThePrimeagen' },
+];
+
+const STATS = [
+  { value: '100M+', label: 'Developers on GitHub' },
+  { value: '372M+', label: 'Repositories' },
+  { value: '4B+', label: 'Contributions' },
+];
+
+export default function HomePage() {
+  const router = useRouter();
+  const [recentSearches, setRecentSearches] = useState([]);
+
+  useEffect(() => {
+    document.title = 'GitView - Explore GitHub Profiles';
+    try {
+      const stored = JSON.parse(localStorage.getItem('gitview_recent') || '[]');
+      setRecentSearches(stored.slice(0, 8));
+    } catch {
+      setRecentSearches([]);
+    }
+  }, []);
+
+  function handleSearch(username) {
+    if (!username.trim()) return;
+    const trimmed = username.trim();
+
+    try {
+      const stored = JSON.parse(localStorage.getItem('gitview_recent') || '[]');
+      const updated = [trimmed, ...stored.filter((s) => s !== trimmed)].slice(0, 8);
+      localStorage.setItem('gitview_recent', JSON.stringify(updated));
+      setRecentSearches(updated);
+    } catch {
+      // localStorage unavailable
+    }
+
+    router.push(`/user/${trimmed}`);
+  }
+
+  function removeRecent(username) {
+    try {
+      const stored = JSON.parse(localStorage.getItem('gitview_recent') || '[]');
+      const updated = stored.filter((s) => s !== username);
+      localStorage.setItem('gitview_recent', JSON.stringify(updated));
+      setRecentSearches(updated);
+    } catch {
+      // localStorage unavailable
+    }
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="home">
+      {/* Animated Background Orbs */}
+      <div className="home__orbs" aria-hidden="true">
+        <div className="home__orb home__orb--1" />
+        <div className="home__orb home__orb--2" />
+        <div className="home__orb home__orb--3" />
+        <div className="home__orb home__orb--4" />
+      </div>
+
+      {/* Hero Section */}
+      <section className="home__hero">
+        <span className="home__badge">🚀 Open Source Explorer</span>
+        <h1 className="home__title">Explore GitHub Profiles</h1>
+        <p className="home__subtitle">
+          Search any GitHub user to view their profile, repositories, and
+          contributions with beautiful visualizations.
+        </p>
+        <div className="home__search-wrapper">
+          <SearchBar onSearch={handleSearch} size="large" />
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Featured Developers */}
+      <section className="home__section">
+        <div className="home__section-header">
+          <span className="home__section-icon">⭐</span>
+          <h2 className="home__section-title">Featured Developers</h2>
         </div>
-      </main>
+        <div className="home__featured">
+          {FEATURED_DEVS.map((dev) => (
+            <Link
+              key={dev.username}
+              href={`/user/${dev.username}`}
+              className="home__featured-card"
+              onClick={() => handleSearch(dev.username)}
+            >
+              <img
+                src={`https://github.com/${dev.username}.png`}
+                alt={dev.name}
+                className="home__featured-avatar"
+                width={40}
+                height={40}
+                loading="lazy"
+              />
+              <div className="home__featured-info">
+                <span className="home__featured-name">{dev.name}</span>
+                <span className="home__featured-username">@{dev.username}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Recent Searches */}
+      <section className="home__section">
+        <div className="home__section-header">
+          <span className="home__section-icon">🕐</span>
+          <h2 className="home__section-title">Recent Searches</h2>
+        </div>
+        <div className="home__recent-list">
+          {recentSearches.length === 0 ? (
+            <span className="home__recent-empty">
+              No recent searches yet. Try searching for a GitHub username above!
+            </span>
+          ) : (
+            recentSearches.map((username) => (
+              <span key={username} className="home__recent-chip">
+                <Link href={`/user/${username}`}>@{username}</Link>
+                <button
+                  className="home__recent-remove"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeRecent(username);
+                  }}
+                  aria-label={`Remove ${username} from recent searches`}
+                >
+                  ×
+                </button>
+              </span>
+            ))
+          )}
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="home__stats">
+        {STATS.map((stat) => (
+          <div key={stat.label} className="home__stat">
+            <div className="home__stat-value">{stat.value}</div>
+            <div className="home__stat-label">{stat.label}</div>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }

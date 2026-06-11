@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔍 GitView — GitHub Profile Viewer
 
-## Getting Started
+A modern, full-stack web application to explore, compare, and bookmark GitHub profiles with beautiful visualizations.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![GitHub API](https://img.shields.io/badge/GitHub-API-181717?logo=github)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+- 🔍 **Search** — Find any GitHub user by username
+- 👤 **Profile Overview** — Avatar, bio, stats, join date, and social links
+- 📦 **Repository Explorer** — Filter & sort repos by language, stars, forks, date
+- 📊 **Language Breakdown** — Interactive donut chart showing language usage
+- 🟩 **Contribution Heatmap** — GitHub-style green squares calendar
+- ⚔️ **Compare Profiles** — Side-by-side comparison of two GitHub users
+- 🔖 **Bookmarks** — Save and manage favorite profiles (localStorage)
+- 🎴 **Profile Card Generator** — Create & download beautiful profile cards
+- 📄 **Repo Details** — README preview, commits, and language breakdown
+- 🌓 **Dark/Light Mode** — System-aware theme with manual toggle
+- 📱 **Responsive** — Works beautifully on all devices
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+ installed
+- (Optional) [GitHub Personal Access Token](https://github.com/settings/tokens)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/github-profile-viewer.git
+   cd github-profile-viewer
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment (optional but recommended)**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   GITHUB_TOKEN=your_github_personal_access_token
+   ```
+   
+   > **Why?** Without a token, you're limited to 60 API requests/hour and can't see contribution data. With a token, you get 5,000 requests/hour and full contribution heatmaps.
+   
+   To create a token:
+   - Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
+   - Click "Generate new token (classic)"
+   - Select scope: `read:user`
+   - Copy the token and paste it in `.env.local`
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in your browser**
+   ```
+   http://localhost:3000
+   ```
+
+## 🏗️ Tech Stack
+
+| Technology | Purpose |
+|-----------|---------|
+| **Next.js 14** | React framework with App Router |
+| **React 18** | UI library |
+| **Chart.js** | Language breakdown visualizations |
+| **Node Cache** | Server-side API response caching |
+| **html-to-image** | Profile card PNG generation |
+| **GitHub REST API** | User, repo, and event data |
+| **GitHub GraphQL API** | Contribution/activity data |
+| **Vanilla CSS** | Custom design system with CSS variables |
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.js              # Root layout with fonts & navbar
+│   ├── page.js                # Home / Search page
+│   ├── globals.css            # Design system & global styles
+│   ├── user/
+│   │   └── [username]/
+│   │       ├── page.js        # Profile page
+│   │       └── repo/
+│   │           └── [reponame]/
+│   │               └── page.js # Repo detail page
+│   ├── compare/
+│   │   └── page.js            # Compare profiles
+│   ├── bookmarks/
+│   │   └── page.js            # Saved bookmarks
+│   └── api/github/            # Backend API routes
+│       ├── user/route.js
+│       ├── repos/route.js
+│       ├── languages/route.js
+│       ├── contributions/route.js
+│       ├── readme/route.js
+│       └── compare/route.js
+├── components/                 # Reusable React components
+├── hooks/                      # Custom React hooks
+├── lib/                        # Utility functions
+└── styles/                     # Component & page CSS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Screenshots
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+> Run the app locally to see it in action!
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🤝 Contributing
 
-## Learn More
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the MIT License.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🙏 Acknowledgments
 
-## Deploy on Vercel
+- [GitHub API](https://docs.github.com/en/rest) for providing the data
+- [Chart.js](https://www.chartjs.org/) for beautiful charts
+- [Next.js](https://nextjs.org/) for the amazing framework
+- [Google Fonts](https://fonts.google.com/) for Inter and JetBrains Mono
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Built with ❤️ as a B.Tech CSE Final Year Project**

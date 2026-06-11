@@ -1,0 +1,475 @@
+/* ============================================
+   User Profile Page Styles
+   ============================================ */
+
+.user-page {
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---------- Breadcrumb ---------- */
+
+.user-page__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.user-page__breadcrumb a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.user-page__breadcrumb a:hover {
+  color: #a5b4fc;
+}
+
+.user-page__breadcrumb-separator {
+  color: var(--text-tertiary);
+}
+
+.user-page__breadcrumb-current {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ---------- Profile Header Area ---------- */
+
+.user-page__header {
+  margin-bottom: 2rem;
+}
+
+/* ---------- Two-Column Content ---------- */
+
+.user-page__content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.user-page__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.user-page__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---------- Section Cards (Glassmorphism) ---------- */
+
+.user-page__section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.3s ease;
+}
+
+.user-page__section:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-page__section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.user-page__section-icon {
+  font-size: 1.1rem;
+}
+
+/* ---------- Tabs ---------- */
+
+.user-page__tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 0.3rem;
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+
+.user-page__tab {
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-page__tab:hover {
+  color: var(--text-primary);
+}
+
+.user-page__tab--active {
+  background: rgba(88, 166, 255, 0.15);
+  color: var(--accent-blue);
+}
+
+/* ---------- Loading Skeleton ---------- */
+
+.user-page__loading {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---------- Error States ---------- */
+
+.user-page__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.user-page__error-icon {
+  font-size: 3rem;
+}
+
+.user-page__error-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.user-page__error-message {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  max-width: 400px;
+}
+
+.user-page__error-action {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.user-page__error-action:hover {
+  opacity: 0.85;
+}
+
+/* ---------- Not Found ---------- */
+
+.user-page__not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.user-page__not-found-code {
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.user-page__not-found-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.user-page__not-found-message {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+/* ---------- Repo Detail Page ---------- */
+
+.repo-page__header {
+  margin-bottom: 1.5rem;
+}
+
+.repo-page__name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.repo-page__description {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.repo-page__homepage {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #818cf8;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+
+.repo-page__homepage:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* ---------- Stats Bar ---------- */
+
+.repo-page__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.repo-page__stat {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+.repo-page__stat-icon {
+  font-size: 1rem;
+}
+
+.repo-page__stat-value {
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+/* ---------- Language Bar ---------- */
+
+.repo-page__languages {
+  margin-bottom: 1.5rem;
+}
+
+.repo-page__language-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.repo-page__language-segment {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.repo-page__language-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.repo-page__language-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.repo-page__language-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ---------- Topics ---------- */
+
+.repo-page__topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.repo-page__topic {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* ---------- README ---------- */
+
+.repo-page__readme {
+  margin-top: 1.5rem;
+}
+
+.repo-page__readme-content {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+  overflow-x: auto;
+  font-family: var(--font-mono, monospace);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---------- Commits List ---------- */
+
+.repo-page__commits {
+  margin-top: 1.5rem;
+}
+
+.repo-page__commit {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.repo-page__commit:last-child {
+  border-bottom: none;
+}
+
+.repo-page__commit-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.repo-page__commit-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.repo-page__commit-message {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo-page__commit-meta {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+.repo-page__commit-sha {
+  font-family: var(--font-mono, monospace);
+  color: #818cf8;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.repo-page__commit-sha:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Back Link ---------- */
+
+.repo-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #818cf8;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.repo-page__back:hover {
+  color: #a5b4fc;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+  .user-page__content {
+    grid-template-columns: 1fr;
+  }
+
+  .user-page__sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-page {
+    padding: 1rem;
+  }
+
+  .user-page__sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .user-page__section {
+    padding: 1rem;
+  }
+
+  .repo-page__stats {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-page {
+    padding: 0.75rem;
+  }
+
+  .user-page__breadcrumb {
+    font-size: 0.78rem;
+  }
+}
