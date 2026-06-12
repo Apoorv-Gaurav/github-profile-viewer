@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useBookmarks } from '../../hooks/useBookmarks';
+import AnimatedBackground from '../../components/AnimatedBackground';
 import '../../styles/components/bookmarks.css';
 
 const SORT_OPTIONS = [
@@ -62,6 +63,7 @@ export default function BookmarksPage() {
 
   return (
     <div className="bookmarks-page">
+      <AnimatedBackground />
       <div className="bookmarks-page__header">
         <div className="bookmarks-page__header-top">
           <div>
@@ -150,10 +152,10 @@ export default function BookmarksPage() {
       {/* Bookmarks Grid */}
       {filteredBookmarks.length > 0 && (
         <div className="bookmarks-page__grid">
-          {filteredBookmarks.map((bookmark) => {
+          {filteredBookmarks.map((bookmark, index) => {
             const username = bookmark.login || bookmark.username;
             return (
-              <div key={username} className="bookmarks-page__card">
+              <div key={bookmark.id || username || `bookmark-${index}`} className="bookmarks-page__card">
                 <div className="bookmarks-page__card-header">
                   <img
                     src={

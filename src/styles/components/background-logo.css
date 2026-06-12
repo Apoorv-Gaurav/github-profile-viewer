@@ -1,0 +1,122 @@
+/* ============================================================
+   3D Background Logo – Pure CSS 3D Coin
+   ============================================================ */
+
+/* ---------- Fullscreen container ---------- */
+.bg3d {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ---------- Perspective wrapper (scaled up) ---------- */
+.bg3d__scene {
+  width: 360px;
+  height: 360px;
+  perspective: 1000px;
+}
+
+/* ---------- 3D object (the coin) ---------- */
+.bg3d__logo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  opacity: 0.3;
+}
+
+/* ---------- Shared face styles ---------- */
+.bg3d__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  backface-visibility: visible;
+}
+
+/* ---------- Front face ---------- */
+.bg3d__face--front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(10px);
+  background: radial-gradient(circle at 38% 38%, #2d3139, #14171c 75%);
+  box-shadow:
+    inset 0 2px 40px rgba(255, 255, 255, 0.06),
+    inset 0 -6px 20px rgba(0, 0, 0, 0.35),
+    0 0 80px rgba(139, 92, 246, 0.06);
+}
+
+.bg3d__face--front svg {
+  width: 58%;
+  height: 58%;
+  color: #c9d1d9;
+  filter: drop-shadow(0 4px 16px rgba(139, 92, 246, 0.15));
+}
+
+/* ---------- Back face ---------- */
+.bg3d__face--back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg) translateZ(10px);
+  background: radial-gradient(circle at 62% 38%, #2d3139, #14171c 75%);
+  box-shadow:
+    inset 0 2px 40px rgba(255, 255, 255, 0.04),
+    inset 0 -6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.bg3d__face--back svg {
+  width: 58%;
+  height: 58%;
+  color: #6e7681;
+  filter: drop-shadow(0 4px 16px rgba(139, 92, 246, 0.08));
+}
+
+/* ---------- Edge ring (circular border using box-shadow on a thin disc) ---------- */
+.bg3d__face--edge {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translateZ(0px);
+  background: transparent;
+  box-shadow:
+    0 0 0 4px #24272e,
+    0 0 0 6px #1a1d22,
+    0 0 0 8px rgba(139, 92, 246, 0.04);
+}
+
+/* ---------- Ambient glow behind the coin ---------- */
+.bg3d__logo::after {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      rgba(139, 92, 246, 0.05) 0%,
+      rgba(88, 166, 255, 0.02) 35%,
+      transparent 60%);
+  pointer-events: none;
+  transform: translateZ(-60px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .bg3d__scene {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bg3d__scene {
+    width: 200px;
+    height: 200px;
+  }
+}

@@ -58,12 +58,14 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .user-page__sidebar {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 /* ---------- Section Cards (Glassmorphism) ---------- */
@@ -78,7 +80,7 @@
 }
 
 .user-page__section:hover {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-blue);
 }
 
 .user-page__section-title {
@@ -163,7 +165,7 @@
 
 .user-page__error-message {
   font-size: 0.95rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   max-width: 400px;
 }
 
@@ -209,12 +211,12 @@
 .user-page__not-found-title {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--text-primary);
 }
 
 .user-page__not-found-message {
   font-size: 0.95rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 /* ---------- Repo Detail Page ---------- */
@@ -226,7 +228,7 @@
 .repo-page__name {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #e2e8f0;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -234,7 +236,7 @@
 
 .repo-page__description {
   font-size: 1rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   margin-top: 0.5rem;
   line-height: 1.5;
 }
@@ -243,7 +245,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: #818cf8;
+  color: var(--text-link);
   font-size: 0.85rem;
   margin-top: 0.5rem;
   text-decoration: none;
@@ -261,7 +263,7 @@
   flex-wrap: wrap;
   gap: 1.25rem;
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border);
   margin-bottom: 1.5rem;
 }
 
@@ -270,7 +272,7 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 0.88rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .repo-page__stat-icon {
@@ -279,7 +281,7 @@
 
 .repo-page__stat-value {
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--text-primary);
 }
 
 /* ---------- Language Bar ---------- */
@@ -294,7 +296,7 @@
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
 }
 
 .repo-page__language-segment {
@@ -313,7 +315,7 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .repo-page__language-dot {
@@ -336,9 +338,9 @@
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   font-size: 0.75rem;
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(88, 166, 255, 0.1);
+  color: var(--accent-blue);
+  border: 1px solid rgba(88, 166, 255, 0.2);
 }
 
 /* ---------- README ---------- */
@@ -350,11 +352,11 @@
 .repo-page__readme-content {
   padding: 1.25rem;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
   font-size: 0.9rem;
   line-height: 1.7;
-  color: #cbd5e1;
+  color: var(--text-secondary);
   overflow-x: auto;
   font-family: var(--font-mono, monospace);
   white-space: pre-wrap;
@@ -371,7 +373,7 @@
   display: flex;
   gap: 0.75rem;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-muted);
 }
 
 .repo-page__commit:last-child {
@@ -392,7 +394,7 @@
 
 .repo-page__commit-message {
   font-size: 0.85rem;
-  color: #e2e8f0;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -400,13 +402,13 @@
 
 .repo-page__commit-meta {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   margin-top: 0.2rem;
 }
 
 .repo-page__commit-sha {
   font-family: var(--font-mono, monospace);
-  color: #818cf8;
+  color: var(--text-link);
   font-size: 0.75rem;
   text-decoration: none;
 }
@@ -421,7 +423,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #818cf8;
+  color: var(--text-link);
   font-size: 0.9rem;
   text-decoration: none;
   margin-top: 1.5rem;

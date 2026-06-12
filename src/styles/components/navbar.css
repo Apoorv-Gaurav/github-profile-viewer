@@ -23,12 +23,13 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl); /* Increased from lg */
   font-weight: 700;
   color: var(--text-primary);
   text-decoration: none;
   flex-shrink: 0;
   transition: opacity var(--transition-fast);
+  position: relative;
 }
 
 .navbar-logo:hover {
@@ -36,9 +37,92 @@
   opacity: 0.85;
 }
 
-.navbar-logo svg {
+.navbar-octocat-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-octocat {
   width: 28px;
   height: 28px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.navbar-logo:hover .navbar-octocat {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* Jumping animation on click */
+.navbar-logo--jumping .navbar-octocat {
+  animation: octocatJump 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+@keyframes octocatJump {
+  0% {
+    transform: translateY(0) scaleX(1) scaleY(1) rotate(0deg);
+  }
+  10% {
+    /* Crouch / squash before jump */
+    transform: translateY(2px) scaleX(1.15) scaleY(0.85) rotate(0deg);
+  }
+  30% {
+    /* Launch up + stretch */
+    transform: translateY(-18px) scaleX(0.9) scaleY(1.15) rotate(-15deg);
+  }
+  50% {
+    /* Peak — full flip */
+    transform: translateY(-22px) scaleX(1) scaleY(1) rotate(-180deg);
+  }
+  70% {
+    /* Falling back + continue flip */
+    transform: translateY(-8px) scaleX(0.95) scaleY(1.08) rotate(-300deg);
+  }
+  85% {
+    /* Land — squash on impact */
+    transform: translateY(2px) scaleX(1.12) scaleY(0.88) rotate(-360deg);
+  }
+  92% {
+    /* Bounce back up a tiny bit */
+    transform: translateY(-3px) scaleX(1) scaleY(1.04) rotate(-360deg);
+  }
+  100% {
+    /* Settle */
+    transform: translateY(0) scaleX(1) scaleY(1) rotate(-360deg);
+  }
+}
+
+/* Landing ripple effect */
+.navbar-logo--jumping .navbar-octocat-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 24px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  opacity: 0;
+  animation: landRipple 0.8s ease forwards;
+}
+
+@keyframes landRipple {
+  0%, 80% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+  85% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.5);
+    opacity: 0;
+  }
 }
 
 .navbar-logo span {
@@ -58,18 +142,36 @@
 .navbar-link {
   position: relative;
   padding: var(--space-sm) var(--space-md);
-  font-size: var(--text-sm);
+  font-size: var(--text-base); /* Increased from sm */
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius-sm);
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 20px;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .navbar-link:hover {
   color: var(--text-primary);
   background: var(--bg-tertiary);
+  transform: translateY(-2px);
   text-decoration: none;
+}
+
+.navbar-link:hover::after {
+  transform: translateX(-50%) scaleX(1.5);
 }
 
 .navbar-link.active {
@@ -77,15 +179,7 @@
 }
 
 .navbar-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 2px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-full);
+  transform: translateX(-50%) scaleX(1);
 }
 
 /* ---------- Right Section ---------- */

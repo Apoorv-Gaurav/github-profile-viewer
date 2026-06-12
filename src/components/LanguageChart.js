@@ -38,10 +38,11 @@ export default function LanguageChart({ languages }) {
       {
         data: chartData,
         backgroundColor: chartColors,
-        borderColor: 'var(--bg-secondary)',
+        borderColor: 'rgba(255, 255, 255, 0.08)',
         borderWidth: 2,
-        hoverBorderColor: 'var(--bg-primary)',
-        hoverBorderWidth: 3,
+        hoverBorderColor: 'rgba(255, 255, 255, 0.2)',
+        hoverBorderWidth: 2,
+        hoverOffset: 12,
       },
     ],
   };
@@ -49,7 +50,10 @@ export default function LanguageChart({ languages }) {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    cutout: '65%',
+    cutout: '62%',
+    layout: {
+      padding: 12, // Prevents the hover offset from being clipped by the canvas bounds
+    },
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -67,7 +71,9 @@ export default function LanguageChart({ languages }) {
     },
     animation: {
       animateRotate: true,
-      duration: 800,
+      animateScale: true,
+      duration: 1400,
+      easing: 'easeOutQuart',
     },
   };
 

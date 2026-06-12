@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
 import CompareView from '../../components/CompareView';
+import AnimatedBackground from '../../components/AnimatedBackground';
 import { SkeletonProfile } from '../../components/Skeleton';
 import '../../styles/components/compare.css';
 
@@ -67,6 +68,7 @@ export default function ComparePage() {
 
   return (
     <div className="compare-page">
+      <AnimatedBackground />
       <div className="compare-page__header">
         <h1 className="compare-page__title">Compare Profiles</h1>
         <p className="compare-page__subtitle">

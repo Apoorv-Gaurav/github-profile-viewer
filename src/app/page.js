@@ -4,17 +4,18 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import SearchBar from '../components/SearchBar';
+import BackgroundLogo from '../components/BackgroundLogo';
 import '../styles/pages/home.css';
 
 const FEATURED_DEVS = [
-  { username: 'torvalds', name: 'Linus Torvalds' },
-  { username: 'gaearon', name: 'Dan Abramov' },
-  { username: 'sindresorhus', name: 'Sindre Sorhus' },
-  { username: 'tj', name: 'TJ Holowaychuk' },
-  { username: 'yyx990803', name: 'Evan You' },
-  { username: 'getify', name: 'Kyle Simpson' },
-  { username: 'kentcdodds', name: 'Kent C. Dodds' },
-  { username: 'ThePrimeagen', name: 'ThePrimeagen' },
+  { username: 'amanr11314', name: 'Aman Raj' },
+  { username: 'mauryarajeev560-eng', name: 'Rajeev Maurya' },
+  { username: 'Anushka1118', name: 'Anushka' },
+  { username: 'fauzia10', name: 'Fauzia' },
+  { username: 'CodeWithHarry', name: 'CodeWithHarry' },
+  { username: 'hiteshchoudhary', name: 'Hitesh Choudhary' },
+  { username: 'apna-college', name: 'Apna College' },
+  { username: 'Apoorv-Gaurav', name: 'Apoorv Gaurav' },
 ];
 
 const STATS = [
@@ -66,6 +67,9 @@ export default function HomePage() {
 
   return (
     <div className="home">
+      {/* 3D Background Logo */}
+      <BackgroundLogo />
+
       {/* Animated Background Orbs */}
       <div className="home__orbs" aria-hidden="true">
         <div className="home__orb home__orb--1" />

@@ -4,7 +4,6 @@ import { useState, useMemo } from 'react';
 import '../styles/components/heatmap.css';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function getLevel(count) {
   if (count === 0) return 0;
@@ -42,17 +41,22 @@ export default function ContributionHeatmap({ contributions }) {
 
   const { weeks, totalContributions } = contributions;
 
-  // Calculate month labels
+  // Calculate month labels — only place a label if there are at least 3 weeks
+  // gap from the previous label to prevent overlap
   const monthLabels = useMemo(() => {
     const labels = [];
     let lastMonth = -1;
+    let lastWeekIdx = -4;
     weeks.forEach((week, weekIdx) => {
       const firstDay = week.contributionDays[0];
       if (firstDay) {
         const d = new Date(firstDay.date + 'T00:00:00');
         const month = d.getMonth();
-        if (month !== lastMonth) {
+        if (month !== lastMonth && weekIdx - lastWeekIdx >= 3) {
           labels.push({ month: MONTHS[month], weekIdx });
+          lastMonth = month;
+          lastWeekIdx = weekIdx;
+        } else if (month !== lastMonth) {
           lastMonth = month;
         }
       }
@@ -60,6 +64,7 @@ export default function ContributionHeatmap({ contributions }) {
     return labels;
   }, [weeks]);
 
+  // Build columns: each week is a column of 7 rows
   return (
     <div className="heatmap">
       <div className="heatmap__summary">
@@ -68,39 +73,39 @@ export default function ContributionHeatmap({ contributions }) {
         </span>
       </div>
 
-      <div className="heatmap__container">
-        {/* Day labels */}
-        <div className="heatmap__days">
-          <span></span>
-          <span>Mon</span>
-          <span></span>
-          <span>Wed</span>
-          <span></span>
-          <span>Fri</span>
-          <span></span>
+      <div className="heatmap__scroll">
+        {/* Month labels row */}
+        <div className="heatmap__months" style={{ gridTemplateColumns: `repeat(${weeks.length}, var(--heatmap-size))` }}>
+          {monthLabels.map((label, i) => (
+            <span
+              key={i}
+              className="heatmap__month"
+              style={{ gridColumnStart: label.weekIdx + 1 }}
+            >
+              {label.month}
+            </span>
+          ))}
         </div>
 
         <div className="heatmap__graph">
-          {/* Month labels */}
-          <div className="heatmap__months">
-            {monthLabels.map((label, i) => (
-              <span
-                key={i}
-                className="heatmap__month"
-                style={{ gridColumnStart: label.weekIdx + 1 }}
-              >
-                {label.month}
-              </span>
-            ))}
+          {/* Day labels */}
+          <div className="heatmap__days">
+            <span className="heatmap__day-label heatmap__day-label--hidden"></span>
+            <span className="heatmap__day-label">Mon</span>
+            <span className="heatmap__day-label heatmap__day-label--hidden"></span>
+            <span className="heatmap__day-label">Wed</span>
+            <span className="heatmap__day-label heatmap__day-label--hidden"></span>
+            <span className="heatmap__day-label">Fri</span>
+            <span className="heatmap__day-label heatmap__day-label--hidden"></span>
           </div>
 
-          {/* Grid */}
-          <div className="heatmap__grid" style={{ gridTemplateColumns: `repeat(${weeks.length}, 1fr)` }}>
+          {/* Grid of cells — each week is a column */}
+          <div className="heatmap__grid" style={{ gridTemplateColumns: `repeat(${weeks.length}, var(--heatmap-size))` }}>
             {weeks.map((week, weekIdx) =>
-              week.contributionDays.map((day, dayIdx) => (
+              week.contributionDays.map((day) => (
                 <div
-                  key={`${weekIdx}-${dayIdx}`}
-                  className={`heatmap__cell heatmap__cell--level-${getLevel(day.contributionCount)}`}
+                  key={`${weekIdx}-${day.weekday}`}
+                  className={`heatmap__cell heatmap__cell--${getLevel(day.contributionCount)}`}
                   style={{
                     gridColumn: weekIdx + 1,
                     gridRow: day.weekday + 1,
@@ -125,11 +130,11 @@ export default function ContributionHeatmap({ contributions }) {
       {/* Legend */}
       <div className="heatmap__legend">
         <span className="heatmap__legend-label">Less</span>
-        <div className="heatmap__cell heatmap__cell--level-0" />
-        <div className="heatmap__cell heatmap__cell--level-1" />
-        <div className="heatmap__cell heatmap__cell--level-2" />
-        <div className="heatmap__cell heatmap__cell--level-3" />
-        <div className="heatmap__cell heatmap__cell--level-4" />
+        <div className="heatmap__legend-cell heatmap__legend-cell--0" />
+        <div className="heatmap__legend-cell heatmap__legend-cell--1" />
+        <div className="heatmap__legend-cell heatmap__legend-cell--2" />
+        <div className="heatmap__legend-cell heatmap__legend-cell--3" />
+        <div className="heatmap__legend-cell heatmap__legend-cell--4" />
         <span className="heatmap__legend-label">More</span>
       </div>
 

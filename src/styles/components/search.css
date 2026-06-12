@@ -21,7 +21,8 @@
 
 .search-container.large .search-submit {
   height: 44px;
-  padding: 0 var(--space-lg);
+  width: 44px;
+  padding: 0;
 }
 
 /* ---------- Search Form ---------- */
@@ -88,18 +89,23 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .search-submit svg {
   width: 18px;
   height: 18px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .search-submit:hover {
   opacity: 0.9;
-  transform: scale(1.05);
-  box-shadow: var(--shadow-glow-blue);
+  transform: scale(1.1) translateY(-1px);
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+}
+
+.search-submit:hover svg {
+  transform: scale(1.1);
 }
 
 .search-submit:active {

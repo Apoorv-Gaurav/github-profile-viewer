@@ -1,0 +1,103 @@
+/* ============================================================
+   Animated Background – Color-shifting Orbs
+   ============================================================ */
+
+.animated-bg {
+  --orb-hue: 260;
+  --mouse-x: 0.5;
+  --mouse-y: 0.5;
+
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.animated-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.25;
+  animation: orbDrift linear infinite;
+  will-change: transform;
+}
+
+.animated-bg__orb--1 {
+  width: 400px;
+  height: 400px;
+  background: hsl(calc(var(--orb-hue) + 0), 70%, 55%);
+  top: -8%;
+  left: -5%;
+  animation-duration: 20s;
+}
+
+.animated-bg__orb--2 {
+  width: 320px;
+  height: 320px;
+  background: hsl(calc(var(--orb-hue) + 90), 65%, 50%);
+  top: 35%;
+  right: -6%;
+  animation-duration: 24s;
+  animation-delay: -6s;
+}
+
+.animated-bg__orb--3 {
+  width: 280px;
+  height: 280px;
+  background: hsl(calc(var(--orb-hue) + 180), 60%, 50%);
+  bottom: -6%;
+  left: 25%;
+  animation-duration: 26s;
+  animation-delay: -12s;
+}
+
+.animated-bg__orb--4 {
+  width: 220px;
+  height: 220px;
+  background: hsl(calc(var(--orb-hue) + 270), 55%, 55%);
+  top: 15%;
+  left: 55%;
+  animation-duration: 22s;
+  animation-delay: -4s;
+}
+
+@keyframes orbDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(50px, -40px) scale(1.08);
+  }
+  50% {
+    transform: translate(-30px, 30px) scale(0.95);
+  }
+  75% {
+    transform: translate(40px, 50px) scale(1.05);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .animated-bg__orb--1 {
+    width: 260px;
+    height: 260px;
+  }
+
+  .animated-bg__orb--2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .animated-bg__orb--3 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .animated-bg__orb--4 {
+    display: none;
+  }
+}

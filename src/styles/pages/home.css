@@ -178,7 +178,7 @@
 .home__section-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--text-primary);
 }
 
 /* ---------- Featured Cards Grid ---------- */
@@ -199,16 +199,17 @@
   border: 1px solid var(--border);
   backdrop-filter: blur(12px);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   text-decoration: none;
   color: inherit;
 }
 
 .home__featured-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(99, 102, 241, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(99, 102, 241, 0.6);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15), 0 8px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 
 .home__featured-avatar {
@@ -229,7 +230,7 @@
 .home__featured-name {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

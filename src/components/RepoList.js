@@ -6,7 +6,7 @@ import '../styles/components/repo.css';
 
 const PAGE_SIZE = 6;
 
-export default function RepoList({ repos = [], username }) {
+export default function RepoList({ repos = [], username, compact = false }) {
   const [filter, setFilter] = useState('all');
   const [languageFilter, setLanguageFilter] = useState('');
   const [sortBy, setSortBy] = useState('updated');
@@ -67,54 +67,56 @@ export default function RepoList({ repos = [], username }) {
   return (
     <div>
       {/* Controls */}
-      <div className="repo-list-controls">
-        {['all', 'sources', 'forks'].map((f) => (
-          <button
-            key={f}
-            className={`repo-filter-btn${filter === f ? ' active' : ''}`}
-            onClick={() => handleFilterChange(f)}
-          >
-            {f === 'all' ? 'All' : f === 'sources' ? 'Sources' : 'Forks'}
-          </button>
-        ))}
-
-        <select
-          className="repo-select"
-          value={languageFilter}
-          onChange={(e) => { setLanguageFilter(e.target.value); setVisibleCount(PAGE_SIZE); }}
-          aria-label="Filter by language"
-        >
-          <option value="">All Languages</option>
-          {languages.map((lang) => (
-            <option key={lang} value={lang}>{lang}</option>
+      {!compact && (
+        <div className="repo-list-controls">
+          {['all', 'sources', 'forks'].map((f) => (
+            <button
+              key={f}
+              className={`repo-filter-btn${filter === f ? ' active' : ''}`}
+              onClick={() => handleFilterChange(f)}
+            >
+              {f === 'all' ? 'All' : f === 'sources' ? 'Sources' : 'Forks'}
+            </button>
           ))}
-        </select>
 
-        <select
-          className="repo-select"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          aria-label="Sort repositories"
-        >
-          <option value="updated">Recently updated</option>
-          <option value="stars">Stars</option>
-          <option value="name">Name</option>
-          <option value="created">Created</option>
-        </select>
+          <select
+            className="repo-select"
+            value={languageFilter}
+            onChange={(e) => { setLanguageFilter(e.target.value); setVisibleCount(PAGE_SIZE); }}
+            aria-label="Filter by language"
+          >
+            <option value="">All Languages</option>
+            {languages.map((lang) => (
+              <option key={lang} value={lang}>{lang}</option>
+            ))}
+          </select>
 
-        <input
-          className="repo-search-input"
-          type="text"
-          placeholder="Find a repository…"
-          value={searchQuery}
-          onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(PAGE_SIZE); }}
-          aria-label="Search repositories by name"
-        />
+          <select
+            className="repo-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            aria-label="Sort repositories"
+          >
+            <option value="updated">Recently updated</option>
+            <option value="stars">Stars</option>
+            <option value="name">Name</option>
+            <option value="created">Created</option>
+          </select>
 
-        <span className="repo-count">
-          {filteredRepos.length} result{filteredRepos.length !== 1 ? 's' : ''}
-        </span>
-      </div>
+          <input
+            className="repo-search-input"
+            type="text"
+            placeholder="Find a repository…"
+            value={searchQuery}
+            onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(PAGE_SIZE); }}
+            aria-label="Search repositories by name"
+          />
+
+          <span className="repo-count">
+            {filteredRepos.length} result{filteredRepos.length !== 1 ? 's' : ''}
+          </span>
+        </div>
+      )}
 
       {/* Repo grid */}
       {filteredRepos.length > 0 ? (
@@ -124,7 +126,7 @@ export default function RepoList({ repos = [], username }) {
               <RepoCard key={repo.id || repo.name} repo={repo} username={username} />
             ))}
           </div>
-          {hasMore && (
+          {!compact && hasMore && (
             <button
               className="repo-show-more"
               onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
